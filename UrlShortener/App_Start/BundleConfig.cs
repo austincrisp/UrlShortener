@@ -21,10 +21,14 @@ namespace UrlShortener
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/clean-blog.js",
+                      "~/Scripts/contact_me.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/clean-blog.css",
+                      "~/Content/font-awesome.css",
                       "~/Content/site.css"));
         }
     }

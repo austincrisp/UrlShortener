@@ -20,6 +20,9 @@ namespace UrlShortener.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Bookmark> Bookmarks { get; set; }
+        public DbSet<Click> Clicks { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
