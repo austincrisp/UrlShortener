@@ -59,5 +59,67 @@ namespace UrlShortener.Controllers
 
             return View(bookmark);
         }
+
+        // GET: Edit
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Bookmark bookmark = db.Bookmarks.Find(id);
+            if (bookmark == null)
+            {
+                return HttpNotFound();
+            }
+            return View(bookmark);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Title,Description,LongUrl")] Bookmark bookmark)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(bookmark).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(bookmark);
+        }
+
+        // GET: Bookmark/Delete
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Bookmark bookmark = db.Bookmarks.Find(id);
+            if (bookmark == null)
+            {
+                return HttpNotFound();
+            }
+            return View(bookmark);
+        }
+
+        // POST: Bookmark/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Bookmark bookmark = db.Bookmarks.Find(id);
+            db.Bookmarks.Remove(bookmark);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [Route("b/{shortUrl}")]
+        public ActionResult Detail(string Longurl)
+        {
+            var viewPosts = db.Bookmarks.Where(b => b.ShortUrl == Longurl).FirstOrDefault();
+            return View(viewPosts);
+        }
     }
 }

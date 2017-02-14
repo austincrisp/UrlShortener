@@ -1,16 +1,22 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UrlShortener.Models;
 
 namespace UrlShortener.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        public ActionResult Index(string LongUrl)
         {
-            return View();
+            return View(db.Bookmarks.ToList());
         }
 
         public ActionResult About()
