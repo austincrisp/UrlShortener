@@ -77,7 +77,7 @@ namespace UrlShortener.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,LongUrl")] Bookmark bookmark)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description,LongUrl,ShortUrl,OwnerId")] Bookmark bookmark)
         {
             if (ModelState.IsValid)
             {
@@ -116,10 +116,21 @@ namespace UrlShortener.Controllers
         }
 
         [Route("b/{shortUrl}")]
-        public ActionResult Detail(string Longurl)
+        public ActionResult Detail(string ShortUrl)
         {
-            var viewPosts = db.Bookmarks.Where(b => b.ShortUrl == Longurl).FirstOrDefault();
-            return View(viewPosts);
+            var viewPosts = db.Bookmarks.Where(b => b.ShortUrl == ShortUrl).FirstOrDefault();
+
+            Click click = new Click
+            {
+                TimeStamp = DateTime.Now,
+                BookmarkId = viewPosts.Id
+            };
+
+            ViewBag.AllClicks = db.Clicks.OrderByDescending(c => c.TimeStamp).Where(c => c.BookmarkId == c.BookmarkId).ToList();
+            db.Clicks.Add(click);
+            db.SaveChanges();
+
+            return Redirect(viewPosts.LongUrl);
         }
     }
 }
