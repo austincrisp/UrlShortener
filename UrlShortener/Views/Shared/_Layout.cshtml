@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+@using Microsoft.AspNet.Identity
 
 <head>
 
@@ -58,7 +59,7 @@
                             @Html.ActionLink("Bookmarks", "Index", "Bookmark")
                         </li>
                         <li>
-                            @Html.ActionLink("Profile", "Detail", "Home")
+                            @Html.ActionLink("Profile", "Detail", "Home", new { userName = User.Identity.GetUserName() }, new { })
                         </li>
                         <li>
                             @Html.ActionLink("Contact", "Contact", "Home")

@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201702160216064_addedLikeModel.Designer.cs">
       <DependentUpon>201702160216064_addedLikeModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702161834574_changedLikeModel.cs" />
+    <Compile Include="Migrations\201702161834574_changedLikeModel.Designer.cs">
+      <DependentUpon>201702161834574_changedLikeModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bookmark.cs" />
@@ -293,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702160216064_addedLikeModel.resx">
       <DependentUpon>201702160216064_addedLikeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702161834574_changedLikeModel.resx">
+      <DependentUpon>201702161834574_changedLikeModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

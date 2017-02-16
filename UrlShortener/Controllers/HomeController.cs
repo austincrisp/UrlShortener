@@ -38,22 +38,17 @@ namespace UrlShortener.Controllers
         {
             ApplicationUser userInstance = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
             string me = User.Identity.GetUserId();
-            string target = userInstance.Id;
-            bool isLiked = db.Likes
-                .Where(
-                    l => (l.RequestorId == me && l.TargetId == target) ||
-                         (l.TargetId == me && l.RequestorId == target)
-                ).Any();
-            ViewBag.isLiked = isLiked;
+            var likedBookmarks = db.Likes.Where(l => l.RequestorId == userInstance.Id).Include("Target");
+            ViewBag.likedBookmarks = likedBookmarks;
             return View(userInstance);
         }
 
         [HttpPost]
         [Route("u/{username}")]
-        public ActionResult AddLike(string userName)
+        public ActionResult AddLike(string username)
         {
             var me = User.Identity.GetUserId();
-            string target = db.Users.Where(u => u.UserName == userName).FirstOrDefault().Id;
+            var target = int.Parse(Request.Form["BookmarkId"]);
             Like favorite = new Like
             {
                 RequestorId = me,
@@ -61,7 +56,7 @@ namespace UrlShortener.Controllers
             };
             db.Likes.Add(favorite);
             db.SaveChanges();
-            return RedirectToAction("Profile");
+            return RedirectToAction("Detail");
         }
     }
 }
