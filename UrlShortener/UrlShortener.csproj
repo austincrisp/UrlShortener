@@ -183,11 +183,16 @@
     <Compile Include="Migrations\201702132212061_Initial.Designer.cs">
       <DependentUpon>201702132212061_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702160216064_addedLikeModel.cs" />
+    <Compile Include="Migrations\201702160216064_addedLikeModel.Designer.cs">
+      <DependentUpon>201702160216064_addedLikeModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\Click.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Like.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -265,6 +270,7 @@
     <Content Include="Views\Bookmark\Delete.cshtml" />
     <Content Include="Views\Bookmark\Detail.cshtml" />
     <Content Include="Views\Bookmark\Edit.cshtml" />
+    <Content Include="Views\Home\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -284,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702132212061_Initial.resx">
       <DependentUpon>201702132212061_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702160216064_addedLikeModel.resx">
+      <DependentUpon>201702160216064_addedLikeModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

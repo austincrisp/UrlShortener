@@ -22,6 +22,7 @@ namespace UrlShortener.Models
     {
         public DbSet<Bookmark> Bookmarks { get; set; }
         public DbSet<Click> Clicks { get; set; }
+        public DbSet<Like> Likes { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,13 +19,6 @@ namespace UrlShortener.Controllers
         {
             var userId = User.Identity.GetUserId();
             var userInstance = db.Users.Where(u => u.Id == userId).FirstOrDefault();
-            return View(userInstance);
-        }
-
-        [Route("User/{username}")]
-        public ActionResult Detail(string userName)
-        {
-            var userInstance = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
             return View(userInstance);
         }
     }

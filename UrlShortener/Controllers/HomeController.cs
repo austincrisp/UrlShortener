@@ -32,5 +32,36 @@ namespace UrlShortener.Controllers
 
             return View();
         }
+
+        [Route("u/{username}")]
+        public ActionResult Detail(string userName)
+        {
+            ApplicationUser userInstance = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
+            string me = User.Identity.GetUserId();
+            string target = userInstance.Id;
+            bool isLiked = db.Likes
+                .Where(
+                    l => (l.RequestorId == me && l.TargetId == target) ||
+                         (l.TargetId == me && l.RequestorId == target)
+                ).Any();
+            ViewBag.isLiked = isLiked;
+            return View(userInstance);
+        }
+
+        [HttpPost]
+        [Route("u/{username}")]
+        public ActionResult AddLike(string userName)
+        {
+            var me = User.Identity.GetUserId();
+            string target = db.Users.Where(u => u.UserName == userName).FirstOrDefault().Id;
+            Like favorite = new Like
+            {
+                RequestorId = me,
+                TargetId = target
+            };
+            db.Likes.Add(favorite);
+            db.SaveChanges();
+            return RedirectToAction("Profile");
+        }
     }
 }
