@@ -115,6 +115,7 @@ namespace UrlShortener.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         [Route("b/{shortUrl}")]
         public ActionResult Detail(string ShortUrl)
         {

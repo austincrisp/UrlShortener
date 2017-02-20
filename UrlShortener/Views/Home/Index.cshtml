@@ -8,9 +8,9 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>Clean Blog</h1>
+                    <h1>Url Shortener</h1>
                     <hr class="small">
-                    <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                    <span class="subheading">Url Shortening App</span>
                 </div>
             </div>
         </div>
@@ -25,11 +25,12 @@
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><a href="b/@bookmark.ShortUrl">@bookmark.Title</a></h3>
+                            <h3 class="panel-title">@Html.ActionLink(bookmark.Title, "Detail", "Bookmark", new { ShortUrl = bookmark.ShortUrl }, null)</h3>
                         </div>
                         <div class="panel-body">@bookmark.Description</div>
                         @if (User.Identity.IsAuthenticated)
                         {
+                            if (bookmark.doesOwnerLike(bookmark.Owner))
                             using (Html.BeginForm())
                             {
                                 @Html.Hidden("BookmarkId", bookmark.Id, new { @class = "form-control" })

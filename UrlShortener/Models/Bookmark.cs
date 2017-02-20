@@ -18,5 +18,19 @@ namespace UrlShortener.Models
 
         [ForeignKey("OwnerId")]
         public virtual ApplicationUser Owner { get; set; }
+
+        public virtual ICollection<Like> Likes { get; set; }
+
+        public bool doesOwnerLike(ApplicationUser Owner)
+        {
+            if ()
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

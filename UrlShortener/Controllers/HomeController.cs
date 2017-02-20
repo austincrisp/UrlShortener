@@ -14,7 +14,7 @@ namespace UrlShortener.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index(string LongUrl)
+        public ActionResult Index()
         {
             return View(db.Bookmarks.ToList());
         }
@@ -44,8 +44,8 @@ namespace UrlShortener.Controllers
         }
 
         [HttpPost]
-        [Route("u/{username}")]
-        public ActionResult AddLike(string username)
+        [ActionName("Index")]
+        public ActionResult IndexPost()
         {
             var me = User.Identity.GetUserId();
             var target = int.Parse(Request.Form["BookmarkId"]);
@@ -56,7 +56,7 @@ namespace UrlShortener.Controllers
             };
             db.Likes.Add(favorite);
             db.SaveChanges();
-            return RedirectToAction("Detail");
+            return View(db.Bookmarks.ToList());
         }
     }
 }
